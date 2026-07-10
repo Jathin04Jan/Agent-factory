@@ -6,7 +6,7 @@ Run:  python -m orchestrator.main
 import logging
 import time
 
-from . import agent_runner, config, github_ops, jira_client, prompts, sandbox
+from . import agent_runner, chat_queue, config, github_ops, jira_client, prompts, sandbox
 from . import slack_client as slack
 from . import slack_trigger
 
@@ -166,7 +166,8 @@ def process_ticket(ticket: dict) -> None:
 def fetch_tickets() -> list[dict]:
     if USING_JIRA:
         return jira_client.fetch_ready_tickets()
-    return slack_trigger.fetch_new_tasks()
+    # Slack "build:/fix:/task:" triggers plus anything the chat brain dispatched.
+    return slack_trigger.fetch_new_tasks() + chat_queue.drain()
 
 
 def main() -> None:
