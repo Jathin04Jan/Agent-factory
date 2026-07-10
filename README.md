@@ -87,7 +87,7 @@ curl -sSL https://github.com/docker/compose/releases/latest/download/docker-comp
 
 ```bash
 # 1. Clone
-gh repo clone <owner>/Agent-factory-dummy && cd Agent-factory-dummy
+gh repo clone <owner>/Agent-factory && cd Agent-factory
 
 # 2. Python env
 python3 -m venv venv
