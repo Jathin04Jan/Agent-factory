@@ -1,0 +1,18 @@
+[Unit]
+Description=AI Agent Factory Orchestrator
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Run as your normal user — it owns the gh/claude auth
+User=YOUR_USERNAME
+WorkingDirectory=/opt/agent-factory
+ExecStart=/opt/agent-factory/venv/bin/python -m orchestrator.main
+Restart=on-failure
+RestartSec=15
+# Make sure claude + gh are on PATH for the service
+Environment=PATH=/usr/local/bin:/usr/bin:/bin:/home/YOUR_USERNAME/.local/bin
+
+[Install]
+WantedBy=multi-user.target

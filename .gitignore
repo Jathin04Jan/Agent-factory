@@ -1,0 +1,8 @@
+.env
+.slack_cursor
+venv/
+workspaces/
+__pycache__/
+*.pyc
+factory.log
+nohup.out
